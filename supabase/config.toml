@@ -1,0 +1,16 @@
+project_id = "mmygxbfhthrlgamxbcfr"
+
+[functions.send-to-n8n]
+verify_jwt = true
+
+[functions.send-onboarding-to-n8n]
+verify_jwt = true
+
+[functions.admin-users]
+verify_jwt = false
+
+[functions.admin-update-user]
+verify_jwt = false
+
+[functions.admin-create-user]
+verify_jwt = false
