@@ -27,11 +27,11 @@ interface AuthContextType {
   session: Session | null;
   profile: Profile | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string, nome?: string) => Promise<{ error: any }>;
+  signIn: (email: string, password: string) => Promise<{ error: { message: string } | null }>;
+  signUp: (email: string, password: string, nome?: string) => Promise<{ error: { message: string } | null }>;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
-  resetPassword: (email: string) => Promise<{ error: any }>;
+  resetPassword: (email: string) => Promise<{ error: { message: string } | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -205,9 +205,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Por segurança, vamos apenas retornar sucesso sem enviar email customizado por enquanto
       // O Supabase já envia o email padrão
       return { error: null };
-    } catch (error: any) {
+    } catch (error: unknown) {
       logger.error("Erro no processo de recuperação:", error);
-      return { error };
+      const message = error instanceof Error ? error.message : "Erro desconhecido";
+      return { error: { message } };
     }
   };
 

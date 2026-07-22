@@ -8,6 +8,8 @@ O Fala Personal PRO reúne um time de agentes de IA especializados que geram —
 
 🔗 **Demo:** https://fala-personal-pro-app.vercel.app
 
+[![CI](https://github.com/devRenanGaspar/fala-personal-pro-app/actions/workflows/ci.yml/badge.svg)](https://github.com/devRenanGaspar/fala-personal-pro-app/actions/workflows/ci.yml)
+
 ---
 
 ## ✨ Funcionalidades

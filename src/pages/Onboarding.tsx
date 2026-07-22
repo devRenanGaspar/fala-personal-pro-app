@@ -120,7 +120,7 @@ export default function Onboarding() {
 
       toast.success("Perfil configurado com sucesso!");
       navigate("/onboarding-loading");
-    } catch (error: any) {
+    } catch (error: unknown) {
       logger.error("Erro ao finalizar onboarding:", error);
       toast.error("Erro ao salvar suas informações. Tente novamente.");
     } finally {

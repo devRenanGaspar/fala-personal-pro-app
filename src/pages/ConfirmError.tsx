@@ -114,9 +114,9 @@ const ConfirmError = () => {
       logger.info("ConfirmError: Email resent successfully to", emailToResend);
       setEmail(emailToResend);
       setStatus("sent");
-    } catch (err: any) {
+    } catch (err: unknown) {
       logger.error("ConfirmError: Exception while resending email", err);
-      setErrorMessage(err.message || "Erro desconhecido");
+      setErrorMessage(err instanceof Error ? err.message : "Erro desconhecido");
       setStatus("error");
     }
   };

@@ -97,7 +97,7 @@ export function useConversationRealtime(conversationId: string | undefined) {
           );
 
           // Fallback: assistant message resets processing
-          if ((payload.new as any).role === "assistant") {
+          if ((payload.new as Message).role === "assistant") {
             logger.info("[useConversationRealtime] Assistant message received, forcing isProcessing=false");
             setIsProcessing(false);
             clearSafetyTimeout();
