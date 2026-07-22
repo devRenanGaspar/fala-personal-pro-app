@@ -113,6 +113,37 @@ Deno.serve(async (req) => {
     // Create service client for database operations
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
+    // Enforce active plan server-side: um plano inativo ou expirado não pode
+    // consumir IA, mesmo com uma sessão ainda válida. Espelha exatamente a
+    // checagem feita no login (AuthContext.signIn): bloqueia se o plano estiver
+    // inativo ou expirado; se o usuário não tiver plan_id, segue (mesmo critério).
+    const { data: userProfile } = await supabase
+      .from('profiles')
+      .select('plan_id, plan_expires_at')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    if (userProfile?.plan_id) {
+      const { data: plan } = await supabase
+        .from('plans')
+        .select('is_active')
+        .eq('id', userProfile.plan_id)
+        .maybeSingle();
+
+      const planInactive = plan ? plan.is_active === false : false;
+      const planExpired = userProfile.plan_expires_at
+        ? new Date(userProfile.plan_expires_at) < new Date()
+        : false;
+
+      if (planInactive || planExpired) {
+        console.warn('[send-to-n8n] Blocked: plano inativo/expirado', { user_id: user.id });
+        return new Response(
+          JSON.stringify({ error: 'Seu plano está inativo ou expirou. Renove para continuar.' }),
+          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
     // Parse request body (user_id no longer trusted from client)
     const payload: RequestPayload = await req.json();
     const { conversation_id, agent_id, mensagem, initial_message } = payload;
