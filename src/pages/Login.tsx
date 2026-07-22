@@ -43,7 +43,7 @@ const signupSchema = z.object({
     .email("Email inválido"),
   password: z
     .string()
-    .min(6, "Senha deve ter no mínimo 6 caracteres"),
+    .min(8, "Senha deve ter no mínimo 8 caracteres"),
   confirmPassword: z
     .string()
     .min(1, "Confirme sua senha"),
