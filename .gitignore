@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Build / tooling caches
+*.tsbuildinfo
+supabase/.temp
+
 # Environment variables (nunca versionar segredos reais)
 .env
 .env.*
