@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { format, subDays, startOfWeek, startOfMonth, eachDayOfInterval, eachWeekOfInterval, eachMonthOfInterval } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
-export type Period = 7 | 14 | 30 | 90;
+export type Period = 7 | 14 | 30 | 90 | 365;
 export type Granularity = "day" | "week" | "month";
 
 interface ChartDataPoint {
