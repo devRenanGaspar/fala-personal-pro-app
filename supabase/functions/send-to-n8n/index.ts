@@ -22,6 +22,7 @@ interface N8NPayload {
   agent_id: string;
   mensagem: string;
   initial_message?: string | null;
+  system_prompt?: string | null;
 }
 
 // Security: Validate webhook URLs to prevent SSRF attacks
@@ -183,7 +184,7 @@ Deno.serve(async (req) => {
     // Fetch agent data (including initial_message as fallback)
     const { data: agent, error: agentError } = await supabase
       .from('agents')
-      .select('slug, webhook_url, webhook_enabled, webhook_timeout_seconds, initial_message')
+      .select('slug, webhook_url, webhook_enabled, webhook_timeout_seconds, initial_message, system_prompt')
       .eq('id', agent_id)
       .single();
 
@@ -230,6 +231,7 @@ Deno.serve(async (req) => {
       agent_id,
       mensagem,
       initial_message: resolvedInitialMessage,
+      system_prompt: agent.system_prompt ?? null,
     };
 
     console.log('[send-to-n8n] Sending to N8N:', {

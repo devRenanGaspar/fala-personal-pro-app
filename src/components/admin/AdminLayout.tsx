@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { AdminSidebar } from "./AdminSidebar";
 
-type AdminTab = "dashboard" | "users" | "agents";
+type AdminTab = "dashboard" | "users" | "agents" | "prompts";
 
 interface AdminLayoutProps {
   children: ReactNode;

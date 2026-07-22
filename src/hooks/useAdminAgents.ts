@@ -16,6 +16,8 @@ export interface AdminAgent {
   updated_at: string;
   initial_message: string | null;
   suggested_replies: string | null;
+  system_prompt: string | null;
+  webhook_enabled: boolean;
 }
 
 export function useAdminAgents() {
@@ -43,7 +45,7 @@ export function useUpdateAgent() {
       updates,
     }: {
       id: string;
-      updates: Partial<Pick<AdminAgent, "title" | "description" | "icon" | "is_active" | "display_order" | "initial_message" | "suggested_replies">>;
+      updates: Partial<Pick<AdminAgent, "title" | "description" | "icon" | "is_active" | "display_order" | "initial_message" | "suggested_replies" | "system_prompt">>;
     }) => {
       const { data, error } = await supabase
         .from("agents")

@@ -1,9 +1,9 @@
-import { LayoutDashboard, Users, Bot, ArrowLeft } from "lucide-react";
+import { LayoutDashboard, Users, Bot, MessageSquareText, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
-type AdminTab = "dashboard" | "users" | "agents";
+type AdminTab = "dashboard" | "users" | "agents" | "prompts";
 
 interface AdminSidebarProps {
   activeTab: AdminTab;
@@ -15,6 +15,7 @@ const menuItems = [
   { id: "dashboard" as const, label: "Dashboard", icon: LayoutDashboard },
   { id: "users" as const, label: "Usuários", icon: Users },
   { id: "agents" as const, label: "Agentes", icon: Bot },
+  { id: "prompts" as const, label: "Prompts", icon: MessageSquareText },
 ];
 
 export function AdminSidebar({ activeTab, onTabChange, onBack }: AdminSidebarProps) {
