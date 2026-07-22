@@ -110,6 +110,7 @@ export function useAdminChartData(period: Period, granularity: Granularity) {
       const usersByPeriod = new Map<string, Set<string>>();
 
       messagesData?.forEach((msg) => {
+        if (!msg.created_at) return;
         const msgDate = new Date(msg.created_at);
         const key = getDateKey(msgDate, granularity);
         

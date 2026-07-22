@@ -1,4 +1,4 @@
--- Popular banco com dados de teste para personal trainer "Renan Oliveira"
+-- Popular banco com dados de teste para personal trainer "Ana Souza"
 -- User ID: 68b69c96-d6b5-4e0f-a70e-25b140203bcc
 
 -- 1. CRIAR CONVERSAS FALTANTES (bio, posts, stories)
@@ -133,7 +133,7 @@ Ex: 70kg = 2,45 litros por dia"
 
 -- 2. ATUALIZAR CONVERSAS EXISTENTES (nicho e dores-desejos)
 UPDATE conversations 
-SET current_document = '# Definição de Nicho - Renan Oliveira Personal
+SET current_document = '# Definição de Nicho - Ana Souza Personal
 
 ## Público-Alvo Ideal
 

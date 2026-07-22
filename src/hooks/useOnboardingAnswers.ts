@@ -65,16 +65,21 @@ export function useOnboardingAnswers(questions: OnboardingQuestion[] | undefined
     if (!user || !questions) return;
 
     try {
-      const answersToSave = Object.entries(answers).map(([questionKey, answerValue]) => {
-        const question = questions.find((q) => q.question_key === questionKey);
-        if (!question) return null;
+      const answersToSave = Object.entries(answers)
+        .map(([questionKey, answerValue]) => {
+          const question = questions.find((q) => q.question_key === questionKey);
+          if (!question) return null;
 
-        return {
-          user_id: user.id,
-          question_id: question.id,
-          answer_value: answerValue,
-        };
-      }).filter(Boolean);
+          return {
+            user_id: user.id,
+            question_id: question.id,
+            answer_value: answerValue,
+          };
+        })
+        .filter(
+          (a): a is { user_id: string; question_id: string; answer_value: string } =>
+            a !== null
+        );
 
       const { error } = await supabase
         .from("onboarding_answers")

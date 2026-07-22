@@ -447,7 +447,7 @@ const Login = () => {
             <p className="text-sm text-muted-foreground">
               Dúvidas?{" "}
               <a
-                href="https://wa.me/5513996020754"
+                href={import.meta.env.VITE_SUPPORT_WHATSAPP_URL ?? "https://wa.me/5599999999999"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:text-primary/80 font-semibold transition-colors"

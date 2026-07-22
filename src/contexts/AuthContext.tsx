@@ -7,12 +7,12 @@ import { logger } from "@/lib/logger";
 
 interface Profile {
   id: string;
-  onboarding_completed: boolean;
+  onboarding_completed: boolean | null;
   plan_id: string | null;
   plan_started_at: string | null;
   plan_expires_at: string | null;
-  created_at: string;
-  updated_at: string;
+  created_at: string | null;
+  updated_at: string | null;
 }
 
 interface Plan {

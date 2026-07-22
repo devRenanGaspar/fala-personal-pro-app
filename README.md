@@ -6,6 +6,8 @@ O Fala Personal PRO reúne um time de agentes de IA especializados que geram —
 
 > Aplicação full-stack (SPA React + Supabase + orquestração de IA via n8n) construída como peça de portfólio.
 
+🔗 **Demo:** https://fala-personal-pro-app.vercel.app
+
 ---
 
 ## ✨ Funcionalidades
@@ -132,3 +134,9 @@ O projeto é um SPA estático (Vite) e pode ser publicado em qualquer host de es
 3. O arquivo [`vercel.json`](vercel.json) já configura o *rewrite* de SPA para o roteamento client-side funcionar em qualquer rota.
 
 O backend (Supabase + Edge Functions) e os workflows de IA (n8n) são serviços gerenciados separadamente.
+
+---
+
+## 📄 Licença
+
+Distribuído sob a licença MIT. Veja [LICENSE](LICENSE) para mais informações.
