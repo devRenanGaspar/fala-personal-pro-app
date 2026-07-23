@@ -579,6 +579,27 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_list_agents: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          created_at: string | null
+          description: string
+          display_order: number
+          icon: string
+          id: string
+          initial_message: string | null
+          is_active: boolean | null
+          route: string
+          slug: string
+          suggested_replies: string | null
+          system_prompt: string | null
+          title: string
+          updated_at: string | null
+          webhook_enabled: boolean | null
+          webhook_timeout_seconds: number | null
+          webhook_url: string | null
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

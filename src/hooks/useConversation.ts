@@ -19,7 +19,11 @@ export function useConversation(agentSlug: string, options?: UseConversationOpti
         // 1. Buscar agente pelo slug
         const { data: agent, error: agentError } = await supabase
           .from("agents")
-          .select("*")
+          // Somente colunas públicas — system_prompt/webhook_* são restritos
+          // por privilégios de coluna no banco.
+          .select(
+            "id, slug, icon, title, description, route, display_order, is_active, initial_message, suggested_replies"
+          )
           .eq("slug", agentSlug)
           .eq("is_active", true)
           .single();

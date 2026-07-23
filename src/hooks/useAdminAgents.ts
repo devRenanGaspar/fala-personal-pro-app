@@ -24,10 +24,9 @@ export function useAdminAgents() {
   return useQuery({
     queryKey: ["admin-agents"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("agents")
-        .select("*")
-        .order("display_order", { ascending: true });
+      // RPC SECURITY DEFINER: só admins conseguem ler a linha completa
+      // (incluindo system_prompt, restrito por privilégios de coluna).
+      const { data, error } = await supabase.rpc("admin_list_agents");
 
       if (error) throw error;
       return data as AdminAgent[];
@@ -47,11 +46,13 @@ export function useUpdateAgent() {
       id: string;
       updates: Partial<Pick<AdminAgent, "title" | "description" | "icon" | "is_active" | "display_order" | "initial_message" | "suggested_replies" | "system_prompt">>;
     }) => {
+      // Retorna só o id: o select("*") pós-update falharia com os
+      // privilégios de coluna; a lista é recarregada via invalidateQueries.
       const { data, error } = await supabase
         .from("agents")
         .update(updates)
         .eq("id", id)
-        .select()
+        .select("id")
         .single();
 
       if (error) throw error;

@@ -18,9 +18,13 @@ export function useAgents() {
   return useQuery({
     queryKey: ["agents"],
     queryFn: async () => {
+      // Somente colunas públicas — system_prompt/webhook_* são restritos por
+      // privilégios de coluna no banco (select("*") falharia).
       const { data, error } = await supabase
         .from("agents")
-        .select("*")
+        .select(
+          "id, slug, icon, title, description, route, display_order, is_active, initial_message, suggested_replies"
+        )
         .eq("is_active", true)
         .order("display_order", { ascending: true });
 
